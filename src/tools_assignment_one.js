@@ -25,7 +25,7 @@ var student_points = [];
 var group_points = [];
 var style2;
 var group_score = 0;
-var individual_score = [];
+var individual_score = [0,0,0];
 
  //code for starting screen
  var start_screen = function(game){}
@@ -1212,7 +1212,7 @@ var style1 = { font: "16px tahoma", fill: "#000000", boundsAlignH: "center", bou
      create : function()
      {
        var style = { font: "23px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle", wordWrap: true, wordWrapWidth: 800};
-       screen_text[27] = game.add.text(10,146,"The next three videos and questions are for your team grade. For each question, please come to a consensus and choose the right answer",style);
+       screen_text[27] = game.add.text(10,146,"The next two videos and questions are for your team grade. For each question, please come to a consensus and choose the right answer",style);
        //screen_text[17] = game.ad8d.text()
        left_button[25] = game.add.sprite(30,350,'after');
        left_button[25].scale.setTo(0.08,0.08);
@@ -1876,13 +1876,201 @@ sunrise_screen : function()
                quiz5screen: function()
                {
                videosprite[8].kill();
-                game.state.start('quiz5_screen');
+                game.state.start('individual_quiz1');
 
                },
                quiz6screen : function()
                {
                 videosprite[8].kill();
                 game.state.start('quiz6_screen');
+
+               },
+      }
+      var pan_screen2 = function(game){}
+      pan_screen2.prototype =
+      {
+       init : function()
+       {
+          game.load = new CustomLoader(game);
+       },
+        preload : function()
+       {
+
+
+        game.load.video('pan','assets/pan.mp4');
+        game.load.image('before','assets/left.png');
+        game.load.image('after','assets/right.png');
+
+      },
+      start : function()
+      {
+
+          //  After 5 seconds we'll swap to a new video
+          game.time.events.add(5000, changeSource, this);
+
+          //  This would swap on a mouse click
+          // game.input.onDown.addOnce(changeSource, this);
+
+      },
+       create : function()
+       {
+         this.game.scale.pageAlignHorizontally = true;
+         this.game.scale.pageAlignVertically = true;
+         this.game.scale.refresh();
+         this.game.stage.backgroundColor = "#ffffff";
+
+       //  this.game.backgroundColor = 0x4488aa;
+       //   sessionstart()
+       video_play[8] = 0;
+       video[8] = game.add.video('pan');
+       //background[0] = game.add.sprite(0,0,'demo','INTROSCREEN_BG');
+       //submit_button = game.add.button()
+       video[8].play(true);
+       video[8].loop = false;
+       video[8].onComplete.add(this.video_stop,this);
+
+       videosprite[8] = video[8].addToWorld(0,60,0,0);
+     videosprite[8].scale.setTo(0.55,0.55);
+          game.input.onDown.add(this.pause, this);
+          left_button[16] = game.add.sprite(38,0,'after');
+          left_button[16].scale.setTo(0.1,0.1);
+          left_button[16].inputEnabled = true;
+          left_button[16].events.onInputDown.add(this.quiz5screen,this);
+          right_button[16] = game.add.sprite(950,0,'before');
+          right_button[16].scale.setTo(0.1,0.1);
+          right_button[16].inputEnabled = true;
+          right_button[16].events.onInputDown.add(this.quiz6screen,this);
+
+
+       var style = { font: "17px arial", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+      var newtext=  game.add.text(352,900,'To play and pause, tap on the screen',style);
+       //var style1 = { font: "16px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+       // reg.modal = new gameModal(game);
+         //  this.createModals();
+       },
+
+
+       /*render : function()
+              {
+               game.debug.text('x: ' + game.input.x + ' y: ' + game.input.y, 32, 32);
+             },*/
+               pause : function()
+               {
+
+               video[8].paused = (video[8].paused) ? false : true;
+
+               },
+               video_stop : function()
+               {
+                videosprite[8].kill();
+              //  game.state.start('hands_screen');
+
+               },
+
+               quiz5screen: function()
+               {
+               videosprite[8].kill();
+                game.state.start('individual_quiz2');
+
+               },
+               quiz6screen : function()
+               {
+                videosprite[8].kill();
+                game.state.start('quiz62_screen');
+
+               },
+      }
+      var pan_screen3 = function(game){}
+      pan_screen3.prototype =
+      {
+       init : function()
+       {
+          game.load = new CustomLoader(game);
+       },
+        preload : function()
+       {
+
+
+        game.load.video('pan','assets/pan.mp4');
+        game.load.image('before','assets/left.png');
+        game.load.image('after','assets/right.png');
+
+      },
+      start : function()
+      {
+
+          //  After 5 seconds we'll swap to a new video
+          game.time.events.add(5000, changeSource, this);
+
+          //  This would swap on a mouse click
+          // game.input.onDown.addOnce(changeSource, this);
+
+      },
+       create : function()
+       {
+         this.game.scale.pageAlignHorizontally = true;
+         this.game.scale.pageAlignVertically = true;
+         this.game.scale.refresh();
+         this.game.stage.backgroundColor = "#ffffff";
+
+       //  this.game.backgroundColor = 0x4488aa;
+       //   sessionstart()
+       video_play[8] = 0;
+       video[8] = game.add.video('pan');
+       //background[0] = game.add.sprite(0,0,'demo','INTROSCREEN_BG');
+       //submit_button = game.add.button()
+       video[8].play(true);
+       video[8].loop = false;
+       video[8].onComplete.add(this.video_stop,this);
+
+       videosprite[8] = video[8].addToWorld(0,60,0,0);
+     videosprite[8].scale.setTo(0.55,0.55);
+          game.input.onDown.add(this.pause, this);
+          left_button[16] = game.add.sprite(38,0,'after');
+          left_button[16].scale.setTo(0.1,0.1);
+          left_button[16].inputEnabled = true;
+          left_button[16].events.onInputDown.add(this.quiz5screen,this);
+          right_button[16] = game.add.sprite(950,0,'before');
+          right_button[16].scale.setTo(0.1,0.1);
+          right_button[16].inputEnabled = true;
+          right_button[16].events.onInputDown.add(this.quiz6screen,this);
+
+
+       var style = { font: "17px arial", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+      var newtext=  game.add.text(352,900,'To play and pause, tap on the screen',style);
+       //var style1 = { font: "16px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+       // reg.modal = new gameModal(game);
+         //  this.createModals();
+       },
+
+
+       /*render : function()
+              {
+               game.debug.text('x: ' + game.input.x + ' y: ' + game.input.y, 32, 32);
+             },*/
+               pause : function()
+               {
+
+               video[8].paused = (video[8].paused) ? false : true;
+
+               },
+               video_stop : function()
+               {
+                videosprite[8].kill();
+              //  game.state.start('hands_screen');
+
+               },
+
+               quiz5screen: function()
+               {
+               videosprite[8].kill();
+                game.state.start('individual_quiz3');
+
+               },
+               quiz6screen : function()
+               {
+                videosprite[8].kill();
+                game.state.start('quiz63_screen');
 
                },
       }
@@ -2324,7 +2512,7 @@ sunrise_screen : function()
 
 
        var style = { font: "23px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
-       screen_text[10] = game.add.text(92,146,'What kind of heat transfer is seen here?',style);
+       screen_text[10] = game.add.text(92,146,'What kind of heat transfer is involved in making the hot air balloon rise?',style);
        var style1 = { font: "20px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
 
        screen_text[11] = game.add.text(95,190,'Click on the correct text answer below.',style1);
@@ -2343,12 +2531,12 @@ sunrise_screen : function()
 
        console.log('hey');
        }
-       style3 = { font: "23px tahoma", fill: "#39ff14", boundsAlignH: "center", boundsAlignV: "middle" }; //correctanswer
-       style4 = { font: "23px tahoma", fill: "#FF0000", boundsAlignH: "center", boundsAlignV: "middle" };//wrong answer
-      feedback[10] = game.add.text(95,502,'',style4);
-      feedback[11] = game.add.text(95,502,'',style3);
-      feedback[12] = game.add.text(95,502,'',style4);
-      feedback[13] = game.add.text(95,502,'',style4);
+       style3 = { font: "23px tahoma", fill: "#39ff14", boundsAlignH: "center", boundsAlignV: "middle", wordWrap : true, wordWrapWidth : 500}; //correctanswer
+       style4 = { font: "23px tahoma", fill: "#FF0000", boundsAlignH: "center", boundsAlignV: "middle",  wordWrap : true, wordWrapWidth : 500};//wrong answer
+      feedback[10] = game.add.text(95,402,'',style4);
+      feedback[11] = game.add.text(95,402,'',style3);
+      feedback[12] = game.add.text(95,402,'',style4);
+      feedback[13] = game.add.text(95,402,'',style4);
 
        },
 
@@ -2386,7 +2574,7 @@ sunrise_screen : function()
             }
             //hiding all previous feedback
 
-            feedback[10].text = 'Are you sure? The balloon rises up because of the hot air from fire.';
+            feedback[10].text = 'No, the answer is just convection.  The burner at the base of the balloon warms the air inside. As the air warms up, it moves upwards, moving back down when it cools, which is convection heat transfer. The burner’s flame never directly touches the balloon in any way, so it’s not conduction and while the flame does give off radiation heat, it cuts through the air and is not involved in heating the air, which is what is causing the balloon to rise.';
             //feedback_next[6]=game.add.text(95,530,'Let us understand this more. Click on the next button.',style4);
             right_button[13].inputEnabled = true;
             right_button[13].events.onInputDown.add(this.pan,this);
@@ -2466,7 +2654,7 @@ sunrise_screen : function()
             {
               feedback[13].text = "";
             }
-            feedback[12].text = 'Are you sure? Is the heat flowing without contact or any medium? ';
+            feedback[12].text = 'No, the answer is just convection.  The burner at the base of the balloon warms the air inside. As the air warms up, it moves upwards, moving back down when it cools, which is convection heat transfer. The burner’s flame never directly touches the balloon in any way, so it’s not conduction and while the flame does give off radiation heat, it cuts through the air and is not involved in heating the air, which is what is causing the balloon to rise.';
             //feedback_next[5] = game.add.text(95,532,'Let us understand this better in the next section.',style4);
 
             right_button[13].inputEnabled = true;
@@ -2505,7 +2693,7 @@ sunrise_screen : function()
               feedback[12].text = "";
             }
 
-            feedback[13].text = 'That is not right. For heat transfer in this case, the two objects are in contact.';
+            feedback[13].text = 'No, the answer is just convection.  The burner at the base of the balloon warms the air inside. As the air warms up, it moves upwards, moving back down when it cools, which is convection heat transfer. The burner’s flame never directly touches the balloon in any way, so it’s not conduction and while the flame does give off radiation heat, it cuts through the air and is not involved in heating the air, which is what is causing the balloon to rise.';
             //feedback_next[5] = game.add.text(95,532,'Let us understand this better in the next section.',style4);
 
             right_button[13].inputEnabled = true;
@@ -2532,7 +2720,7 @@ sunrise_screen : function()
         },
         pan : function()
         {
-          game.state.start('pan_screen');
+          game.state.start('group_grade_screen');
         },
         hotairballoon : function()
         {
@@ -2610,7 +2798,155 @@ sunrise_screen : function()
         },
         pan12 : function()
         {
-          game.state.start('group_grade_screen');
+          game.state.start('interimscreen2');
+        }
+      }
+      var end_screen2 = function(game){}
+      end_screen2.prototype =
+      {
+
+       init : function()
+       {
+          game.load = new CustomLoader(game);
+       },
+        preload : function()
+       {
+       //game.plugins.add(new Phaser.Plugin.PhaserWebComponents(game));
+        game.load.webfont('tahoma','Tahoma');
+        game.load.image('after','assets/right.png');
+
+
+       game.load.video('lecture','assets/lecture.mp4');
+
+      },
+       create : function()
+       {
+       //   sessionstart();
+       video_play[13] = 0;
+       video[13] = game.add.video('lecture');
+       //background[0] = game.add.sprite(0,0,'demo','INTROSCREEN_BG');
+       //submit_button = game.add.button()
+       video[13].play(true);
+       video[13].loop = false;
+       video[13].onComplete.add(this.video13_stop,this);
+
+       videosprite[9] = video[13].addToWorld(0,60,0,0);
+      videosprite[9].scale.setTo(0.6,0.6);
+          game.input.onDown.add(this.pause13, this);
+          console.log('hi');
+
+       //background[0] = game.add.sprite(0,0,'demo','INTROSCREEN_BG');
+       //submit_button = game.add.button()
+       this.game.stage.backgroundColor = "#ffffff";
+       this.game.scale.pageAlignHorizontally = true;
+       this.game.scale.pageAlignVertically = true;
+       this.game.scale.refresh();
+       left_button[14] = game.add.sprite(38,12,'after');
+       left_button[14].scale.setTo(0.08,0.08);
+       left_button[14].inputEnabled = true;
+       left_button[14].events.onInputDown.add(this.pan1,this);
+       var style = { font: "23px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+       //screen_text[10] = game.add.text(92,146,'What kind of heat transfer is seen here?',style);
+       right_button[14] = game.add.sprite(950,12,'before');
+       right_button[14].scale.setTo(0.08,0.08);
+       right_button[14].inputEnabled = true;
+       right_button[14].events.onInputDown.add(this.pan12,this);
+
+       },
+        pan1 : function()
+        {
+          game.state.start('quiz6_screen');
+        },
+        pause13 : function()
+        {
+
+        video[13].paused = (video[13].paused) ? false : true;
+
+        },
+        video13_stop : function()
+        {
+       videosprite[9].kill();
+            //video[13].onComplete.add(this.video_stop,this);
+         //game.state.start('');
+
+        },
+        pan12 : function()
+        {
+          game.state.start('interimscreen3');
+        }
+      }
+      var end_screen3 = function(game){}
+      end_screen3.prototype =
+      {
+
+       init : function()
+       {
+          game.load = new CustomLoader(game);
+       },
+        preload : function()
+       {
+       //game.plugins.add(new Phaser.Plugin.PhaserWebComponents(game));
+        game.load.webfont('tahoma','Tahoma');
+        game.load.image('after','assets/right.png');
+
+
+       game.load.video('lecture','assets/lecture.mp4');
+
+      },
+       create : function()
+       {
+       //   sessionstart();
+       video_play[13] = 0;
+       video[13] = game.add.video('lecture');
+       //background[0] = game.add.sprite(0,0,'demo','INTROSCREEN_BG');
+       //submit_button = game.add.button()
+       video[13].play(true);
+       video[13].loop = false;
+       video[13].onComplete.add(this.video13_stop,this);
+
+       videosprite[9] = video[13].addToWorld(0,60,0,0);
+      videosprite[9].scale.setTo(0.6,0.6);
+          game.input.onDown.add(this.pause13, this);
+          console.log('hi');
+
+       //background[0] = game.add.sprite(0,0,'demo','INTROSCREEN_BG');
+       //submit_button = game.add.button()
+       this.game.stage.backgroundColor = "#ffffff";
+       this.game.scale.pageAlignHorizontally = true;
+       this.game.scale.pageAlignVertically = true;
+       this.game.scale.refresh();
+       left_button[14] = game.add.sprite(38,12,'after');
+       left_button[14].scale.setTo(0.08,0.08);
+       left_button[14].inputEnabled = true;
+       left_button[14].events.onInputDown.add(this.pan1,this);
+       var style = { font: "23px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+       //screen_text[10] = game.add.text(92,146,'What kind of heat transfer is seen here?',style);
+       right_button[14] = game.add.sprite(950,12,'before');
+       right_button[14].scale.setTo(0.08,0.08);
+       right_button[14].inputEnabled = true;
+       right_button[14].events.onInputDown.add(this.pan12,this);
+
+       },
+        pan1 : function()
+        {
+          game.state.start('quiz6_screen');
+        },
+        pause13 : function()
+        {
+
+        video[13].paused = (video[13].paused) ? false : true;
+
+        },
+        video13_stop : function()
+        {
+       videosprite[9].kill();
+            //video[13].onComplete.add(this.video_stop,this);
+         //game.state.start('');
+
+        },
+        pan12 : function()
+        {
+          game.state.start('final_screen');
         }
       }
 
@@ -2673,12 +3009,12 @@ sunrise_screen : function()
 
        console.log('hey');
        }
-       style3 = { font: "23px tahoma", fill: "#39ff14", boundsAlignH: "center", boundsAlignV: "middle" }; //correctanswer
-       style4 = { font: "23px tahoma", fill: "#FF0000", boundsAlignH: "center", boundsAlignV: "middle" };//wrong answer
-         feedback[6] = game.add.text(95,502,'',style3);
-         feedback[7] = game.add.text(95,502,'',style4);
-         feedback[8] = game.add.text(95,502,'',style4);
-         feedback[9] = game.add.text(95,502,'',style4);
+       style3 = { font: "23px tahoma", fill: "#39ff14", boundsAlignH: "center", boundsAlignV: "middle", wordWrap : true, wordWrapWidth : 500}; //correctanswer
+       style4 = { font: "23px tahoma", fill: "#FF0000", boundsAlignH: "center", boundsAlignV: "middle", wordWrap : true, wordWrapWidth : 500};//wrong answer
+         feedback[6] = game.add.text(95,402,'',style3);
+         feedback[7] = game.add.text(95,402,'',style4);
+         feedback[8] = game.add.text(95,402,'',style4);
+         feedback[9] = game.add.text(95,402,'',style4);
 
        },
        /*render : function()
@@ -2750,7 +3086,7 @@ sunrise_screen : function()
             {
               feedback[6].text = "";
             }
-            feedback[7].text = 'Are you sure? Is vapor in touch with the butter? Or is there heat transfer through another medium?';
+            feedback[7].text = 'No, the answer is conduction and convection.  The hot water heats the air between it and the plate (convection) which then transfers to the plate the butter is sitting on.  The plate itself then directly transfers its heat to the butter (conduction).  Only things that give off light and heat can give off radiation heat, so it is not a factor in this case.';
             //feedback_next[5] = game.add.text(95,532,'Let us understand this better in the next section.',style4);
 
             right_button[11].inputEnabled = true;
@@ -2788,7 +3124,7 @@ sunrise_screen : function()
             {
               feedback[9].text = "";
             }
-            feedback[8].text = 'Are you sure? Is the heat flowing without contact or any medium? ';
+            feedback[8].text = 'No, the answer is conduction and convection.  The hot water heats the air between it and the plate (convection) which then transfers to the plate the butter is sitting on.  The plate itself then directly transfers its heat to the butter (conduction).  Only things that give off light and heat can give off radiation heat, so it is not a factor in this case.';
             //feedback_next[5] = game.add.text(95,532,'Let us understand this better in the next section.',style4);
 
             right_button[11].inputEnabled = true;
@@ -2826,7 +3162,7 @@ sunrise_screen : function()
             {
               feedback[6].text = '';
             }
-            feedback[9].text = 'That is not right. Since the two are in contact, there is a medium';
+            feedback[9].text = 'No, the answer is conduction and convection.  The hot water heats the air between it and the plate (convection) which then transfers to the plate the butter is sitting on.  The plate itself then directly transfers its heat to the butter (conduction).  Only things that give off light and heat can give off radiation heat, so it is not a factor in this case.';
             //feedback_next[5] = game.add.text(95,532,'Let us understand this better in the next section.',style4);
 
             right_button[11].inputEnabled = true;
@@ -3062,7 +3398,7 @@ sunrise_screen : function()
 
           else if (fb == "D. All of the above")
           {
-            group_score = group_score + 1;
+            individual_score[0] = individual_score[0] + 1;
 
             if(feedback[14] != '')
             {
@@ -3112,6 +3448,513 @@ sunrise_screen : function()
         }
 
     }
+    var quiz62_screen = function(game){}
+    quiz62_screen.prototype =
+    {
+
+     init : function()
+     {
+        game.load = new CustomLoader(game);
+     },
+      preload : function()
+     {
+     //game.plugins.add(new Phaser.Plugin.PhaserWebComponents(game));
+      game.load.webfont('tahoma','Tahoma');
+      game.load.image('before','assets/left.png');
+      game.load.image('after','assets/right.png');
+     // game.load.video('demo','assets/SummerBreeze.mp4');
+
+    },
+     create : function()
+     {
+     //   sessionstart();
+
+     //background[0] = game.add.sprite(0,0,'demo','INTROSCREEN_BG');
+     //submit_button = game.add.button()
+     this.game.stage.backgroundColor = "#ffffff";
+     this.game.scale.pageAlignHorizontally = true;
+     this.game.scale.pageAlignVertically = true;
+     this.game.scale.refresh();
+     left_button[16] = game.add.sprite(38,12,'after');
+     left_button[16].scale.setTo(0.12,0.12);
+     left_button[16].inputEnabled = true;
+     left_button[16].events.onInputDown.add(this.pan,this);
+     right_button[16] = game.add.sprite(950,12,'before');
+     right_button[16].scale.setTo(0.12,0.12);
+
+
+     var style = { font: "23px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+     screen_text[8] = game.add.text(92,146,'What kind of heat transfer is seen here in a pan of boiling water?',style);
+     var style1 = { font: "20px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+
+     screen_text[9] = game.add.text(95,190,'Click on the correct text answer below.',style1);
+     var style2 = { font: "23px tahoma", fill: "#737373", boundsAlignH: "center", boundsAlignV: "middle" };
+
+     answer_option[14] = game.add.text(100,230,'A. Conduction',style2);
+     answer_option[15] = game.add.text(100,260,'B. Convection', style2);
+     answer_option[16] = game.add.text(100,290,'C. Radiation', style2);
+     answer_option[17] = game.add.text(100,320,'D. All of the above',style2);
+
+     //
+     for(i=14;i<18;i++)
+     {
+     answer_option[i].inputEnabled = true;
+     answer_option[i].events.onInputDown.add(this.feedback61_function,this);
+
+     console.log('hey');
+     }
+
+     feedback[14] = game.add.text(95,502,'',style4);
+     feedback[15] = game.add.text(95,502,'',style4);
+     feedback[16] = game.add.text(95,502,'',style4);
+     feedback[17] = game.add.text(95,502,'',style3);
+
+     },
+
+
+
+     /*render : function()
+            {
+             game.debug.text('x: ' + game.input.x + ' y: ' + game.input.y, 32, 32);
+           },*/
+      feedback61_function : function(item)
+      {
+        console.log('hi1');
+        feedback_count[3] = feedback_count[3] + 1;
+        if(feedback_count[3] < 2)
+        {
+
+          console.log("hi12");
+        console.log('hi');
+        var fb = item.text;
+        console.log(item.text);
+        var style3 = { font: "23px tahoma", fill: "#39ff14", boundsAlignH: "center", boundsAlignV: "middle" }; //correctanswer
+        var style4 = { font: "23px tahoma", fill: "#FF0000", boundsAlignH: "center", boundsAlignV: "middle" };//wrong answer
+
+
+
+        if (fb == "A. Conduction")
+        {
+          //hiding all previous feedback
+          if(feedback[15] != '')
+          {
+            feedback[15].text = '';
+           //  feedback_next[6].text ='';
+          }
+          if(feedback[16] != '')
+          {
+            feedback[16].text = '';
+          }
+          if(feedback[17] != '')
+          {
+            feedback[17].text = '';
+          }
+          feedback[14].text = 'Are you sure? You might be overlooking some things here.';
+          //feedback_next[6]=game.add.text(95,530,'Let us understand this more. Click on the next button.',style4);
+          right_button[16].inputEnabled = true;
+          right_button[16].events.onInputDown.add(this.pan1,this);
+          // for (i=14; i<18; i++)
+          // {
+          //   if(feedback[i])
+          //   {
+          //   if (feedback[i] !==0 && i!== 14)
+          //   {
+          //     feedback[i].destroy();
+          //   }
+          // }
+          // if(feedback_next[i])
+          // {
+          //   if (feedback_next[i] !==0 && i!== 4)
+          //   {
+          //     feedback_next[i].destroy();
+          //   }
+          // }
+          }
+
+
+
+        else if (fb == "B. Convection")
+        {
+          if(feedback[14] != '')
+          {
+            feedback[14].text = "";
+           //  feedback_next[6].text ='';
+          }
+          if(feedback[16])
+          {
+            feedback[16].text = "";
+          }
+          if(feedback[17])
+          {
+            feedback[17].text = "";
+          }
+
+          feedback[15].text = 'Are you sure? The base of the pan is touching the flame.';
+          //feedback_next[5] = game.add.text(95,532,'Let us understand this better in the next section.',style4);
+
+          right_button[16].inputEnabled = true;
+          right_button[16].events.onInputDown.add(this.pan1,this);
+          // for (i=14; i<18; i++)
+          // {
+          //   if(feedback[i])
+          //   {
+          //   if (feedback[i] !==0 && i!== 15)
+          //   {
+          //     feedback[i].destroy();
+          //   }
+          // }
+          // if(feedback_next[i])
+          // {
+          //   if (feedback_next[i] !==0 && i!== 5)
+          //   {
+          //     feedback_next[i].destroy();
+          //   }
+          // }
+        }
+
+        else if (fb == "C. Radiation")
+        {
+          if(feedback[14] != '')
+          {
+            feedback[14].text = '';
+           //  feedback_next[6].text ='';
+          }
+          if(feedback[15] != '')
+          {
+            feedback[15].text = '';
+          }
+          if(feedback[17] != '')
+          {
+            feedback[17].text = '';
+          }
+          feedback[16].text = 'Are you sure? You might have overlooked some things.';
+          //feedback_next[5] = game.add.text(95,532,'Let us understand this better in the next section.',style4);
+
+          right_button[16].inputEnabled = true;
+          right_button[16].events.onInputDown.add(this.pan1,this);
+          // for (i=14; i<18; i++)
+          // {
+          //   if(feedback[i])
+          //   {
+          //   if (feedback[i] !==0 && i!== 16)
+          //   {
+          //     feedback[i].destroy();
+          //   }
+          // }
+          // if(feedback_next[i])
+          // {
+          //   if (feedback_next[i] !==0 && i!== 5)
+          //   {
+          //     feedback_next[i].destroy();
+          //   }
+          // }
+        }
+
+        else if (fb == "D. All of the above")
+        {
+          individual_score[1] = individual_score[1] + 1;
+
+
+          if(feedback[14] != '')
+          {
+            feedback[14].text = '';
+           //  feedback_next[6].text ='';
+          }
+          if(feedback[15] != '')
+          {
+            feedback[15].text = '';
+          }
+          if(feedback[16] != '')
+          {
+            feedback[16].text = '';
+          }
+          feedback[17].text = 'That is right. Click next to see the lecture. ';
+          //feedback_next[5] = game.add.text(95,532,'Let us understand this better in the next section.',style4);
+
+         right_button[16].inputEnabled = true;
+          right_button[16].events.onInputDown.add(this.pan1,this);
+        //   for (i=14; i<18; i++)
+        //   {
+        //     if(feedback[i])
+        //     {
+        //     if (feedback[i] !==0 && i!== 17)
+        //     {
+        //       feedback[i].destroy();
+        //     }
+        //   }
+        //   // if(feedback_next[i])
+        //   // {
+        //   //   if (feedback_next[i] !==0 && i!== 5)
+        //   //   {
+        //   //     feedback_next[i].destroy();
+        //   //   }
+        //   // }
+        // }
+        }
+   }
+      },
+      pan : function()
+      {
+         game.state.start('pan_screen');
+       },
+      pan1 : function()
+      {
+        game.state.start('end_screen2');
+      }
+
+  }
+  var quiz63_screen = function(game){}
+  quiz63_screen.prototype =
+  {
+
+   init : function()
+   {
+      game.load = new CustomLoader(game);
+   },
+    preload : function()
+   {
+   //game.plugins.add(new Phaser.Plugin.PhaserWebComponents(game));
+    game.load.webfont('tahoma','Tahoma');
+    game.load.image('before','assets/left.png');
+    game.load.image('after','assets/right.png');
+   // game.load.video('demo','assets/SummerBreeze.mp4');
+
+  },
+   create : function()
+   {
+   //   sessionstart();
+
+   //background[0] = game.add.sprite(0,0,'demo','INTROSCREEN_BG');
+   //submit_button = game.add.button()
+   this.game.stage.backgroundColor = "#ffffff";
+   this.game.scale.pageAlignHorizontally = true;
+   this.game.scale.pageAlignVertically = true;
+   this.game.scale.refresh();
+   left_button[16] = game.add.sprite(38,12,'after');
+   left_button[16].scale.setTo(0.12,0.12);
+   left_button[16].inputEnabled = true;
+   left_button[16].events.onInputDown.add(this.pan,this);
+   right_button[16] = game.add.sprite(950,12,'before');
+   right_button[16].scale.setTo(0.12,0.12);
+
+
+   var style = { font: "23px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+   screen_text[8] = game.add.text(92,146,'What kind of heat transfer is seen here in a pan of boiling water?',style);
+   var style1 = { font: "20px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+
+   screen_text[9] = game.add.text(95,190,'Click on the correct text answer below.',style1);
+   var style2 = { font: "23px tahoma", fill: "#737373", boundsAlignH: "center", boundsAlignV: "middle" };
+
+   answer_option[14] = game.add.text(100,230,'A. Conduction',style2);
+   answer_option[15] = game.add.text(100,260,'B. Convection', style2);
+   answer_option[16] = game.add.text(100,290,'C. Radiation', style2);
+   answer_option[17] = game.add.text(100,320,'D. All of the above',style2);
+
+   //
+   for(i=14;i<18;i++)
+   {
+   answer_option[i].inputEnabled = true;
+   answer_option[i].events.onInputDown.add(this.feedback62_function,this);
+
+   console.log('hey');
+   }
+
+   feedback[14] = game.add.text(95,502,'',style4);
+   feedback[15] = game.add.text(95,502,'',style4);
+   feedback[16] = game.add.text(95,502,'',style4);
+   feedback[17] = game.add.text(95,502,'',style3);
+
+   },
+
+
+
+   /*render : function()
+          {
+           game.debug.text('x: ' + game.input.x + ' y: ' + game.input.y, 32, 32);
+         },*/
+    feedback62_function : function(item)
+    {
+      feedback_count[4] = feedback_count[4] + 1;
+      if(feedback_count[4]<2)
+      {
+      console.log('hi');
+      var fb = item.text;
+      console.log(item.text);
+      var style3 = { font: "23px tahoma", fill: "#39ff14", boundsAlignH: "center", boundsAlignV: "middle" }; //correctanswer
+      var style4 = { font: "23px tahoma", fill: "#FF0000", boundsAlignH: "center", boundsAlignV: "middle" };//wrong answer
+
+
+
+      if (fb == "A. Conduction")
+      {
+        //hiding all previous feedback
+        if(feedback[15] != '')
+        {
+          feedback[15].text = '';
+         //  feedback_next[6].text ='';
+        }
+        if(feedback[16] != '')
+        {
+          feedback[16].text = '';
+        }
+        if(feedback[17] != '')
+        {
+          feedback[17].text = '';
+        }
+        feedback[14].text = 'Are you sure? You might be overlooking some things here.';
+        //feedback_next[6]=game.add.text(95,530,'Let us understand this more. Click on the next button.',style4);
+        right_button[16].inputEnabled = true;
+        right_button[16].events.onInputDown.add(this.pan1,this);
+        // for (i=14; i<18; i++)
+        // {
+        //   if(feedback[i])
+        //   {
+        //   if (feedback[i] !==0 && i!== 14)
+        //   {
+        //     feedback[i].destroy();
+        //   }
+        // }
+        // if(feedback_next[i])
+        // {
+        //   if (feedback_next[i] !==0 && i!== 4)
+        //   {
+        //     feedback_next[i].destroy();
+        //   }
+        // }
+        }
+
+
+
+      else if (fb == "B. Convection")
+      {
+        if(feedback[14] != '')
+        {
+          feedback[14].text = "";
+         //  feedback_next[6].text ='';
+        }
+        if(feedback[16])
+        {
+          feedback[16].text = "";
+        }
+        if(feedback[17])
+        {
+          feedback[17].text = "";
+        }
+
+        feedback[15].text = 'Are you sure? The base of the pan is touching the flame.';
+        //feedback_next[5] = game.add.text(95,532,'Let us understand this better in the next section.',style4);
+
+        right_button[16].inputEnabled = true;
+        right_button[16].events.onInputDown.add(this.pan1,this);
+        // for (i=14; i<18; i++)
+        // {
+        //   if(feedback[i])
+        //   {
+        //   if (feedback[i] !==0 && i!== 15)
+        //   {
+        //     feedback[i].destroy();
+        //   }
+        // }
+        // if(feedback_next[i])
+        // {
+        //   if (feedback_next[i] !==0 && i!== 5)
+        //   {
+        //     feedback_next[i].destroy();
+        //   }
+        // }
+      }
+
+      else if (fb == "C. Radiation")
+      {
+        if(feedback[14] != '')
+        {
+          feedback[14].text = '';
+         //  feedback_next[6].text ='';
+        }
+        if(feedback[15] != '')
+        {
+          feedback[15].text = '';
+        }
+        if(feedback[17] != '')
+        {
+          feedback[17].text = '';
+        }
+        feedback[16].text = 'Are you sure? You might have overlooked some things.';
+        //feedback_next[5] = game.add.text(95,532,'Let us understand this better in the next section.',style4);
+
+        right_button[16].inputEnabled = true;
+        right_button[16].events.onInputDown.add(this.pan1,this);
+        // for (i=14; i<18; i++)
+        // {
+        //   if(feedback[i])
+        //   {
+        //   if (feedback[i] !==0 && i!== 16)
+        //   {
+        //     feedback[i].destroy();
+        //   }
+        // }
+        // if(feedback_next[i])
+        // {
+        //   if (feedback_next[i] !==0 && i!== 5)
+        //   {
+        //     feedback_next[i].destroy();
+        //   }
+        // }
+      }
+
+      else if (fb == "D. All of the above")
+      {
+        individual_score[2] = individual_score[2] + 1;
+
+
+        if(feedback[14] != '')
+        {
+          feedback[14].text = '';
+         //  feedback_next[6].text ='';
+        }
+        if(feedback[15] != '')
+        {
+          feedback[15].text = '';
+        }
+        if(feedback[16] != '')
+        {
+          feedback[16].text = '';
+        }
+        feedback[17].text = 'That is right. Click next to see the lecture. ';
+        //feedback_next[5] = game.add.text(95,532,'Let us understand this better in the next section.',style4);
+
+       right_button[16].inputEnabled = true;
+        right_button[16].events.onInputDown.add(this.pan1,this);
+      //   for (i=14; i<18; i++)
+      //   {
+      //     if(feedback[i])
+      //     {
+      //     if (feedback[i] !==0 && i!== 17)
+      //     {
+      //       feedback[i].destroy();
+      //     }
+      //   }
+      //   // if(feedback_next[i])
+      //   // {
+      //   //   if (feedback_next[i] !==0 && i!== 5)
+      //   //   {
+      //   //     feedback_next[i].destroy();
+      //   //   }
+      //   // }
+      // }
+      }
+ }
+    },
+    pan : function()
+    {
+       game.state.start('pan_screen');
+     },
+    pan1 : function()
+    {
+      game.state.start('end_screen3');
+    }
+
+}
     var group_grade_screen = function(game){}
     group_grade_screen.prototype =
     {
@@ -3153,22 +3996,18 @@ sunrise_screen : function()
       var style1 = { font: "20px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
       if(group_score == 0)
       {
-          screen_text[8] = game.add.text(92,146,'Your group grade is 0/60 as you got no answers correct',style);
+          screen_text[8] = game.add.text(92,146,'Your group grade is 0/50 as you got no answers correct',style);
       }
       else if(group_score == 1)
       {
-        screen_text[8] = game.add.text(92,146,'Your group grade is 20/60 as you got one answer correct out of 3',style);
+        screen_text[8] = game.add.text(92,146,'Your group grade is 25/50 as you got one answer correct out of two',style);
       }
       else if (group_score == 2)
       {
-        screen_text[8] = game.add.text(92,146,'Your group grade is 40/60 as you got two answers correct out of 3',style);
+        screen_text[8] = game.add.text(92,146,'Your group grade is 50/50 as you got both answers correct',style);
 
       }
-      else if (group_score == 3)
-      {
-        screen_text[8] = game.add.text(92,146,'Your group grade is 60/60 as you got all answers correct.',style);
 
-      }
 
    },
    pan122 : function()
@@ -3227,7 +4066,7 @@ sunrise_screen : function()
       // play_button.events.onInputDown.add(this.help_function,this);
           //  this.createModals();
           game.input.onDown.add(this.pause_function2, this);
-          video[17].onComplete.add(this.video3_stop,this);
+          video[17].onComplete.add(this.video17_stop,this);
 
           left_button[30] = game.add.sprite(38,10,'after');
           left_button[30].scale.setTo(0.08,0.08);
@@ -3252,7 +4091,7 @@ sunrise_screen : function()
                 video[17].paused = (video[17].paused) ? false : true;
 
                 },
-                video3_stop : function()
+                video17_stop : function()
                 {
 
 
@@ -3321,7 +4160,7 @@ sunrise_screen : function()
       // play_button.events.onInputDown.add(this.help_function,this);
           //  this.createModals();
           game.input.onDown.add(this.pause_function2, this);
-          video[18].onComplete.add(this.video3_stop,this);
+          video[18].onComplete.add(this.video17_stop,this);
 
           left_button[31] = game.add.sprite(38,10,'after');
           left_button[31].scale.setTo(0.08,0.08);
@@ -3346,7 +4185,7 @@ sunrise_screen : function()
                 video[17].paused = (video[17].paused) ? false : true;
 
                 },
-                video3_stop : function()
+                video17_stop : function()
                 {
 
 
@@ -3365,7 +4204,7 @@ sunrise_screen : function()
                },
     }
     var lastvideoscreen3 = function(game){}
-    lastvideoscreen1.prototype =
+    lastvideoscreen3.prototype =
     {
       init : function()
       {
@@ -3415,7 +4254,7 @@ sunrise_screen : function()
       // play_button.events.onInputDown.add(this.help_function,this);
           //  this.createModals();
           game.input.onDown.add(this.pause_function2, this);
-          video[19].onComplete.add(this.video3_stop,this);
+          video[19].onComplete.add(this.video17_stop,this);
 
           left_button[32] = game.add.sprite(38,10,'after');
           left_button[32].scale.setTo(0.08,0.08);
@@ -3440,7 +4279,7 @@ sunrise_screen : function()
                 video[19].paused = (video[19].paused) ? false : true;
 
                 },
-                video3_stop : function()
+                video17_stop : function()
                 {
 
 
@@ -3593,11 +4432,11 @@ individual_quiz1.prototype=
 
     answer_option[18] = game.add.text(100,230,'A. Conduction and Convection',style2);
     answer_option[19] = game.add.text(100,260,'B. Convection and Radiation',style2);
-    style3 = { font: "23px tahoma", fill: "#39ff14", boundsAlignH: "center", boundsAlignV: "middle", wordWrap : true, wordWrapWidth :400}; //correctanswer
-    style4 = { font: "23px tahoma", fill: "#FF0000", boundsAlignH: "center", boundsAlignV: "middle", wordWrap : true, wordWrapWidth :400};//wrong answer
-    feedback[0] = game.add.text(95,502,'',style4);
+    style3 = { font: "23px tahoma", fill: "#39ff14", boundsAlignH: "center", boundsAlignV: "middle", wordWrap : true, wordWrapWidth :600}; //correctanswer
+    style4 = { font: "23px tahoma", fill: "#FF0000", boundsAlignH: "center", boundsAlignV: "middle", wordWrap : true, wordWrapWidth :600};//wrong answer
+    feedback[0] = game.add.text(95,402,'',style4);
   //  feedback_next[0]=game.add.text(95,530,'',style3);
-    feedback[1] = game.add.text(95,502,'',style3);
+    feedback[1] = game.add.text(95,402,'',style3);
     //feedback[2] = game.add.text(95,502,'',style4)
     //feedback_next[1]=game.add.text(95,530,'',style4);
     //
@@ -3663,13 +4502,13 @@ individual_quiz1.prototype=
 
 
      },
-     gototoconductionscreen : function()
+     gototointerimscreen2 : function()
      {
-       game.state.start('interimscreen2');
+       game.state.start('pan_screen');
      },
      gotowrongone : function()
      {
-       game.state.start('interimscreen2');
+       game.state.start('pan_screen');
      },
      backtosecondscreen : function()
      {
@@ -3718,11 +4557,11 @@ individual_quiz2.prototype=
 
     answer_option[18] = game.add.text(100,230,'A. Conduction and Convection',style2);
     answer_option[19] = game.add.text(100,260,'B. Convection and Radiation',style2);
-    style3 = { font: "23px tahoma", fill: "#39ff14", boundsAlignH: "center", boundsAlignV: "middle", wordWrap : true, wordWrapWidth :400}; //correctanswer
-    style4 = { font: "23px tahoma", fill: "#FF0000", boundsAlignH: "center", boundsAlignV: "middle", wordWrap : true, wordWrapWidth :400};//wrong answer
-    feedback[0] = game.add.text(95,502,'',style4);
+    style3 = { font: "23px tahoma", fill: "#39ff14", boundsAlignH: "center", boundsAlignV: "middle", wordWrap : true, wordWrapWidth :500}; //correctanswer
+    style4 = { font: "23px tahoma", fill: "#FF0000", boundsAlignH: "center", boundsAlignV: "middle", wordWrap : true, wordWrapWidth :500};//wrong answer
+    feedback[0] = game.add.text(95,402,'',style4);
   //  feedback_next[0]=game.add.text(95,530,'',style3);
-    feedback[1] = game.add.text(95,502,'',style3);
+    feedback[1] = game.add.text(95,402,'',style3);
     //feedback[2] = game.add.text(95,502,'',style4)
     //feedback_next[1]=game.add.text(95,530,'',style4);
     //
@@ -3757,9 +4596,7 @@ individual_quiz2.prototype=
          //feedback_next[0].text = 'Let us understand this more. Click on the next button.';
 
          right_button[33].inputEnabled = true;
-         right_button[33].events.onInputDown.add(this.gototointerimscreen2,this);
-
-
+         right_button[33].events.onInputDown.add(this.gototoconductionscreen,this);
        //}
      }
        else if (fb == "B. Convection and Radiation" )
@@ -3790,11 +4627,11 @@ individual_quiz2.prototype=
      },
      gototoconductionscreen : function()
      {
-       game.state.start('interimscreen3');
+       game.state.start('pan_screen2');
      },
      gotowrongone : function()
      {
-       game.state.start('interimscreen3');
+       game.state.start('pan_screen2');
      },
      backtosecondscreen : function()
      {
@@ -3914,11 +4751,11 @@ individual_quiz3.prototype=
      },
      gototoconductionscreen : function()
      {
-       game.state.start('final_screen');
+       game.state.start('pan_screen3');
      },
      gotowrongone : function()
      {
-       game.state.start('final_screen');
+       game.state.start('pan_screen3');
      },
      backtosecondscreen : function()
      {
@@ -3960,25 +4797,21 @@ final_screen.prototype =
   var style1 = { font: "20px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
   if(group_score == 0)
   {
-      screen_text[8] = game.add.text(92,146,'Your group grade is 0/60 as you got no answers correct',style);
+      screen_text[8] = game.add.text(92,146,'Your group grade is 0/50 as you got no answers correct',style);
   }
   else if(group_score == 1)
   {
-    screen_text[8] = game.add.text(92,146,'Your group grade is 20/60 as you got one answer correct out of 3',style);
+    screen_text[8] = game.add.text(92,146,'Your group grade is 25/50 as you got one answer correct out of two',style);
   }
   else if (group_score == 2)
   {
-    screen_text[8] = game.add.text(92,146,'Your group grade is 40/60 as you got two answers correct out of 3',style);
+    screen_text[8] = game.add.text(92,146,'Your group grade is 50/50 as you got both answers correct',style);
 
   }
-  else if (group_score == 3)
-  {
-    screen_text[8] = game.add.text(92,146,'Your group grade is 60/60 as you got all answers correct.',style);
 
-  }
   screen_text[9] = game.add.text(92,200,input_answer[0].text._text + "your individual grade is " + individual_score[0]*10,style);
-    screen_text[10] = game.add.text(92,250,input_answer[1].text._text + "your individual grade is " + individual_score[1]*10,style);
-    screen_text[11] = game.add.text(92,250,input_answer[2].text._text + "your individual grade is " + individual_score[2]*10,style);
+    screen_text[10] = game.add.text(92,300,input_answer[1].text._text + "your individual grade is " + individual_score[1]*10,style);
+    screen_text[11] = game.add.text(92,400,input_answer[2].text._text + "your individual grade is " + individual_score[2]*10,style);
 
 
 },
@@ -4067,6 +4900,8 @@ game.state.add('quiz2_screen',quiz2_screen);
 game.state.add('quiz3_screen',quiz3_screen);
 game.state.add('quiz4_screen',quiz4_screen);
 game.state.add('end_screen',end_screen);
+game.state.add('end_screen2',end_screen2);
+game.state.add('end_screen3',end_screen3);
 game.state.add('collaborate_screen1',collaborate_screen1);
 game.state.add('collaborate_screen2',collaborate_screen2);
 game.state.add('collaborate_screen3',collaborate_screen3);
@@ -4082,6 +4917,9 @@ game.state.add('middle_screen6',middle_screen6);
 
 game.state.add('quiz5_screen',quiz5_screen);
 game.state.add('quiz6_screen',quiz6_screen);
+game.state.add('quiz62_screen',quiz62_screen);
+game.state.add('quiz63_screen',quiz63_screen);
+
 game.state.add('individual_quiz1',individual_quiz1);
 game.state.add('individual_quiz2',individual_quiz2);
 game.state.add('individual_quiz3',individual_quiz3);
@@ -4106,5 +4944,7 @@ game.state.add('buttermelt2_screen',buttermelt2_screen);
 game.state.add('buttermelt_screen',buttermelt_screen);
 game.state.add('group_grade_screen',group_grade_screen);
 game.state.add('pan_screen',pan_screen);
+game.state.add('pan_screen2',pan_screen2);
+game.state.add('pan_screen3',pan_screen3);
 game.state.start('start_screen');
 }
