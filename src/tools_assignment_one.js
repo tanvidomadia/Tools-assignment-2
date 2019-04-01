@@ -4719,7 +4719,7 @@ individual_quiz3.prototype=
          //feedback_next[0].text = 'Let us understand this more. Click on the next button.';
 
          right_button[29].inputEnabled = true;
-         right_button[29].events.onInputDown.add(this.gototointerimscreen2,this);
+         right_button[29].events.onInputDown.add(this.gototoconductionscreen,this);
 
 
        //}
