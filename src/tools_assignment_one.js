@@ -4809,10 +4809,56 @@ final_screen.prototype =
     screen_text[8] = game.add.text(92,146,'Your group grade is 50/50 as you got both answers correct',style);
 
   }
+  //for 2
+  if(individual_score[0] == 0)
+  {
+    screen_text[9] = game.add.text(92,200,input_answer[0].text._text + " your individual grade is 0/50",style);
 
-  screen_text[9] = game.add.text(92,200,input_answer[0].text._text + " your individual grade is " + individual_score[0]*10,style);
-    screen_text[10] = game.add.text(92,300,input_answer[1].text._text + " your individual grade is " + individual_score[1]*10,style);
-    screen_text[11] = game.add.text(92,400,input_answer[2].text._text + " your individual grade is " + individual_score[2]*10,style);
+  }
+  else if(individual_score[0] == 1)
+  {
+    screen_text[9] = game.add.text(92,200,input_answer[0].text._text + " your individual grade is 25/50",style);
+  }
+  else if (individual_score[0] == 2)
+  {
+    screen_text[9] = game.add.text(92,200,input_answer[0].text._text + " your individual grade is 50/50",style);
+
+
+  }
+  //for 3
+  if(individual_score[1] == 0)
+  {
+    screen_text[10] = game.add.text(92,300,input_answer[1].text._text + " your individual grade is 0/50 ",style);
+
+  }
+  else if(individual_score[1] == 1)
+  {
+    screen_text[10] = game.add.text(92,300,input_answer[1].text._text + " your individual grade is 25/50",style);
+
+  }
+  else if (individual_score[1] == 2)
+  {
+
+    screen_text[10] = game.add.text(92,300,input_answer[1].text._text + " your individual grade is 50/50",style);
+
+  }
+  //for 3
+  if(individual_score[2] == 0)
+  {
+    screen_text[11] = game.add.text(92,400,input_answer[2].text._text + " your individual grade is 0/50 ",style);
+
+  }
+  else if(individual_score[2] == 1)
+  {
+    screen_text[11] = game.add.text(92,400,input_answer[2].text._text + " your individual grade is 25/50 ",style);
+
+  }
+  else if (individual_score[2] == 2)
+  {
+    screen_text[11] = game.add.text(92,400,input_answer[2].text._text + " your individual grade is 50/50 ",style);
+
+
+  }
 
 
 },
