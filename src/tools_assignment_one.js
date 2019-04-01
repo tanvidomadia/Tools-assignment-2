@@ -4260,7 +4260,7 @@ sunrise_screen : function()
           left_button[32] = game.add.sprite(38,10,'after');
           left_button[32].scale.setTo(0.08,0.08);
           left_button[32].inputEnabled = true;
-          left_button[32].events.onInputDown.add(this.backtoconductionscreen111,this);
+          left_button[32].events.onInputDown.add(this.backtoconductionscreen113,this);
           right_button[32] = game.add.sprite(900,10,'before');
           right_button[32].scale.setTo(0.08,0.08);
           right_button[32].inputEnabled = true;
@@ -4810,9 +4810,9 @@ final_screen.prototype =
 
   }
 
-  screen_text[9] = game.add.text(92,200,input_answer[0].text._text + "your individual grade is " + individual_score[0]*10,style);
-    screen_text[10] = game.add.text(92,300,input_answer[1].text._text + "your individual grade is " + individual_score[1]*10,style);
-    screen_text[11] = game.add.text(92,400,input_answer[2].text._text + "your individual grade is " + individual_score[2]*10,style);
+  screen_text[9] = game.add.text(92,200,input_answer[0].text._text + " your individual grade is " + individual_score[0]*10,style);
+    screen_text[10] = game.add.text(92,300,input_answer[1].text._text + " your individual grade is " + individual_score[1]*10,style);
+    screen_text[11] = game.add.text(92,400,input_answer[2].text._text + " your individual grade is " + individual_score[2]*10,style);
 
 
 },
