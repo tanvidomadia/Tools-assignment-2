@@ -124,10 +124,10 @@ borderRadius: 6,
   },
 
   //
-  render : function()
-         {
-          game.debug.text('x: ' + game.input.x + ' y: ' + game.input.y, 32, 32);
-        },
+  // render : function()
+  //        {
+  //         game.debug.text('x: ' + game.input.x + ' y: ' + game.input.y, 32, 32);
+  //       },
           // handsscreen : function()
           // {
           //
@@ -3152,30 +3152,841 @@ sunrise_screen : function()
       var style1 = { font: "20px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
       if(group_score == 0)
       {
-          screen_text[8] = game.add.text(92,146,'Your group grade is 0/60',style);
+          screen_text[8] = game.add.text(92,146,'Your group grade is 0/60 as you got no answers correct',style);
       }
       else if(group_score == 1)
       {
-        screen_text[8] = game.add.text(92,146,'Your group grade is 20/60',style);
+        screen_text[8] = game.add.text(92,146,'Your group grade is 20/60 as you got one answer correct out of 3',style);
       }
       else if (group_score == 2)
       {
-        screen_text[8] = game.add.text(92,146,'Your group grade is 40/60',style);
+        screen_text[8] = game.add.text(92,146,'Your group grade is 40/60 as you got two answers correct out of 3',style);
 
       }
-      else if (group_score == 2)
+      else if (group_score == 3)
       {
-        screen_text[8] = game.add.text(92,146,'Your group grade is 60/60',style);
+        screen_text[8] = game.add.text(92,146,'Your group grade is 60/60 as you got all answers correct.',style);
 
       }
 
    },
    pan122 : function()
    {
-     console.log('hi');
-   }
+     game.state.start('interimscreen1');
+   },
     }
-    /*  var start_screen = function(game){}
+    var lastvideoscreen1 = function(game){}
+    lastvideoscreen1.prototype =
+    {
+      init : function()
+      {
+        game.load = new CustomLoader (game);
+      },
+      preload : function()
+      {
+
+        game.load.video('harley','assets/harley.mp4');
+        game.load.image('before','assets/left.png');
+        game.load.image('after','assets/right.png');
+      },
+      start : function()
+      {
+
+      },
+      create : function()
+      {
+        //   sessionstart()
+          video_play[17] = 0;
+        video[17] = game.add.video('harley');
+        this.game.stage.backgroundColor = "#ffffff";
+        //background[0] = game.add.sprite(0,0,'demo','INTROSCREEN_BG');
+        //submit_button = game.add.button()
+
+        video[17].play(true);
+        videosprite[17] = video[17].addToWorld(0,60,0,0);
+        videosprite[17].scale.setTo(0.6,0.6);
+        video[17].loop = false;
+        video[17].onComplete.add(this.video17_stop,this);
+
+      this.game.scale.pageAlignHorizontally = true;
+      this.game.scale.pageAlignVertically = true;
+      this.game.scale.refresh();
+      this.game.backgroundColor = 0x4488aa;
+
+        var style = { font: "16px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+        screen_text[3] = game.add.text(100,17,input_answer[0].text._text + " only for your viewing. " + "Click anywhere on the screen to play and pause the video.",style);
+        //var style1 = { font: "16px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+        // reg.modal = new gameModal(game);
+        //pause_button = game.add.sprite(340,600,'pause');
+        //pause_button.inputEnabled = true;
+        //pause_button.events.onInputDown.add(this.pause_function,this);
+
+      //  play_button = game.add.sprite(240,600,'play');
+      // play_button.inputEnabled = true;
+      // play_button.events.onInputDown.add(this.help_function,this);
+          //  this.createModals();
+          game.input.onDown.add(this.pause_function2, this);
+          video[17].onComplete.add(this.video3_stop,this);
+
+          left_button[30] = game.add.sprite(38,10,'after');
+          left_button[30].scale.setTo(0.08,0.08);
+          left_button[30].inputEnabled = true;
+          left_button[30].events.onInputDown.add(this.backtoconductionscreen111,this);
+          right_button[30] = game.add.sprite(900,10,'before');
+          right_button[30].scale.setTo(0.08,0.08);
+          right_button[30].inputEnabled = true;
+          right_button[30].events.onInputDown.add(this.quiz2screen,this);
+
+
+        },
+
+
+        /*render : function()
+               {
+                game.debug.text('x: ' + game.input.x + ' y: ' + game.input.y, 32, 32);
+              },*/
+                pause_function2 : function()
+                {
+
+                video[17].paused = (video[17].paused) ? false : true;
+
+                },
+                video3_stop : function()
+                {
+
+
+                  game.state.start('individual_quiz1');
+
+                },
+                quiz2screen : function()
+                {
+                 game.state.start('individual_quiz1');
+               },
+               backtoconductionscreen111 : function()
+               {
+                 videosprite[17].kill();
+                 game.state.start('interimscreen1');
+
+               },      }
+
+    var lastvideoscreen2 = function(game){}
+    lastvideoscreen2.prototype =
+    {
+      init : function()
+      {
+        game.load = new CustomLoader (game);
+      },
+      preload : function()
+      {
+
+        game.load.video('harley','assets/harley.mp4');
+        game.load.image('before','assets/left.png');
+        game.load.image('after','assets/right.png');
+      },
+      start : function()
+      {
+
+      },
+      create : function()
+      {
+        //   sessionstart()
+          video_play[18] = 0;
+        video[18] = game.add.video('harley');
+        this.game.stage.backgroundColor = "#ffffff";
+        //background[0] = game.add.sprite(0,0,'demo','INTROSCREEN_BG');
+        //submit_button = game.add.button()
+
+        video[18].play(true);
+        videosprite[18] = video[18].addToWorld(0,60,0,0);
+        videosprite[18].scale.setTo(0.6,0.6);
+        video[18].loop = false;
+        video[18].onComplete.add(this.video17_stop,this);
+
+      this.game.scale.pageAlignHorizontally = true;
+      this.game.scale.pageAlignVertically = true;
+      this.game.scale.refresh();
+      this.game.backgroundColor = 0x4488aa;
+
+        var style = { font: "16px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+        screen_text[3] = game.add.text(100,17,input_answer[1].text._text + " only for your viewing. " + "Click anywhere on the screen to play and pause the video.",style);
+        //var style1 = { font: "16px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+        // reg.modal = new gameModal(game);
+        //pause_button = game.add.sprite(340,600,'pause');
+        //pause_button.inputEnabled = true;
+        //pause_button.events.onInputDown.add(this.pause_function,this);
+
+      //  play_button = game.add.sprite(240,600,'play');
+      // play_button.inputEnabled = true;
+      // play_button.events.onInputDown.add(this.help_function,this);
+          //  this.createModals();
+          game.input.onDown.add(this.pause_function2, this);
+          video[18].onComplete.add(this.video3_stop,this);
+
+          left_button[31] = game.add.sprite(38,10,'after');
+          left_button[31].scale.setTo(0.08,0.08);
+          left_button[31].inputEnabled = true;
+          left_button[31].events.onInputDown.add(this.backtoconductionscreen112,this);
+          right_button[31] = game.add.sprite(900,10,'before');
+          right_button[31].scale.setTo(0.08,0.08);
+          right_button[31].inputEnabled = true;
+          right_button[31].events.onInputDown.add(this.quiz2screen,this);
+
+
+        },
+
+
+        /*render : function()
+               {
+                game.debug.text('x: ' + game.input.x + ' y: ' + game.input.y, 32, 32);
+              },*/
+                pause_function2 : function()
+                {
+
+                video[17].paused = (video[17].paused) ? false : true;
+
+                },
+                video3_stop : function()
+                {
+
+
+                  game.state.start('individual_quiz2');
+
+                },
+                quiz2screen : function()
+                {
+                 game.state.start('individual_quiz2');
+               },
+               backtoconductionscreen112 : function()
+               {
+                 videosprite[18].kill();
+                 game.state.start('interimscreen2');
+
+               },
+    }
+    var lastvideoscreen3 = function(game){}
+    lastvideoscreen1.prototype =
+    {
+      init : function()
+      {
+        game.load = new CustomLoader (game);
+      },
+      preload : function()
+      {
+
+             game.load.video('harley','assets/harley.mp4');
+             game.load.image('before','assets/left.png');
+             game.load.image('after','assets/right.png');
+      },
+      start : function()
+      {
+
+      },
+      create : function()
+      {
+        //   sessionstart()
+          video_play[19] = 0;
+        video[19] = game.add.video('harley');
+        this.game.stage.backgroundColor = "#ffffff";
+        //background[0] = game.add.sprite(0,0,'demo','INTROSCREEN_BG');
+        //submit_button = game.add.button()
+
+        video[19].play(true);
+        videosprite[19] = video[19].addToWorld(0,60,0,0);
+        videosprite[19].scale.setTo(0.6,0.6);
+        video[19].loop = false;
+        video[19].onComplete.add(this.video17_stop,this);
+
+      this.game.scale.pageAlignHorizontally = true;
+      this.game.scale.pageAlignVertically = true;
+      this.game.scale.refresh();
+      this.game.backgroundColor = 0x4488aa;
+
+        var style = { font: "16px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+        screen_text[3] = game.add.text(100,17,input_answer[2].text._text + " only for your viewing. " + "Click anywhere on the screen to play and pause the video.",style);
+        //var style1 = { font: "16px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+        // reg.modal = new gameModal(game);
+        //pause_button = game.add.sprite(340,600,'pause');
+        //pause_button.inputEnabled = true;
+        //pause_button.events.onInputDown.add(this.pause_function,this);
+
+      //  play_button = game.add.sprite(240,600,'play');
+      // play_button.inputEnabled = true;
+      // play_button.events.onInputDown.add(this.help_function,this);
+          //  this.createModals();
+          game.input.onDown.add(this.pause_function2, this);
+          video[19].onComplete.add(this.video3_stop,this);
+
+          left_button[32] = game.add.sprite(38,10,'after');
+          left_button[32].scale.setTo(0.08,0.08);
+          left_button[32].inputEnabled = true;
+          left_button[32].events.onInputDown.add(this.backtoconductionscreen111,this);
+          right_button[32] = game.add.sprite(900,10,'before');
+          right_button[32].scale.setTo(0.08,0.08);
+          right_button[32].inputEnabled = true;
+          right_button[32].events.onInputDown.add(this.quiz2screen,this);
+
+
+        },
+
+
+        /*render : function()
+               {
+                game.debug.text('x: ' + game.input.x + ' y: ' + game.input.y, 32, 32);
+              },*/
+                pause_function2 : function()
+                {
+
+                video[19].paused = (video[19].paused) ? false : true;
+
+                },
+                video3_stop : function()
+                {
+
+
+                  game.state.start('individual_quiz3');
+
+                },
+                quiz2screen : function()
+                {
+                 game.state.start('individual_quiz3');
+               },
+               backtoconductionscreen113 : function()
+               {
+                 videosprite[19].kill();
+                 game.state.start('interimscreen3');
+
+               },
+      }
+
+   var interimscreen1 = function(game){}
+   interimscreen1.prototype =
+   {
+    init : function()
+    {
+      game.load = new CustomLoader (game);
+    },
+    preload : function()
+    {
+      game.load.webfont('tahoma','Tahoma');
+      game.load.image('after','assets/left.png');
+      game.load.image('before','assets/right.png');
+    },
+    start : function()
+    {
+    },
+    create : function()
+    {
+      var style = { font: "23px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle", wordWrap: true, wordWrapWidth: 800};
+      screen_text[29] = game.add.text(10,146,input_answer[0].text._text + ", the next section is your individual quiz and so please make sure that " + input_answer[1].text._text + " and " + input_answer[2].text._text + " do some work away from the screen.",style);
+      //screen_text[17] = game.add.text()
+      left_button[26] = game.add.sprite(30,235,'after');
+      left_button[26].scale.setTo(0.08,0.08);
+      left_button[26].inputEnabled = true;
+      left_button[26].events.onInputDown.add(this.transition11,this);
+    },
+    transition11 : function()
+    {
+      game.state.start('lastvideoscreen1');
+    }
+  }
+  var interimscreen2 = function(game){}
+  interimscreen2.prototype =
+  {
+   init : function()
+   {
+     game.load = new CustomLoader (game);
+   },
+   preload : function()
+   {
+     game.load.webfont('tahoma','Tahoma');
+     game.load.image('after','assets/left.png');
+     game.load.image('before','assets/right.png');
+   },
+   start : function()
+   {
+   },
+   create : function()
+   {
+     var style = { font: "23px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle", wordWrap: true, wordWrapWidth: 800};
+     screen_text[30] = game.add.text(10,146,input_answer[1].text._text + ", the next section is your individual quiz and so please make sure that " + input_answer[0].text._text + " and " + input_answer[2].text._text + " do some work away from the screen.",style);
+     //screen_text[17] = game.add.text()
+     left_button[27] = game.add.sprite(30,235,'after');
+     left_button[27].scale.setTo(0.08,0.08);
+     left_button[27].inputEnabled = true;
+     left_button[27].events.onInputDown.add(this.transition12,this);
+   },
+   transition12 : function()
+   {
+     game.state.start('lastvideoscreen2');
+   }
+  }
+  var interimscreen3 = function(game){}
+  interimscreen3.prototype =
+  {
+   init : function()
+   {
+     game.load = new CustomLoader (game);
+   },
+   preload : function()
+   {
+     game.load.webfont('tahoma','Tahoma');
+     game.load.image('after','assets/left.png');
+     game.load.image('before','assets/right.png');
+   },
+   start : function()
+   {
+   },
+   create : function()
+   {
+     var style = { font: "23px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle", wordWrap: true, wordWrapWidth: 800};
+     screen_text[31] = game.add.text(10,146,input_answer[2].text._text + ", the next section is your individual quiz and so please make sure that " + input_answer[0].text._text + " and " + input_answer[1].text._text + " do some work away from the screen.",style);
+     //screen_text[17] = game.add.text()
+     left_button[28] = game.add.sprite(30,235,'after');
+     left_button[28].scale.setTo(0.08,0.08);
+     left_button[28].inputEnabled = true;
+     left_button[28].events.onInputDown.add(this.transition11,this);
+   },
+   transition11 : function()
+   {
+     game.state.start('lastvideoscreen3');
+   }
+ }
+var individual_quiz1 = function(game){}
+individual_quiz1.prototype=
+{
+  init : function()
+  {
+    game.load = new CustomLoader (game);
+  },
+  preload : function()
+  {
+
+  },
+  start : function()
+  {
+  },
+  create : function()
+  {
+    //   sessionstart();
+
+    //background[0] = game.add.sprite(0,0,'demo','INTROSCREEN_BG');
+    //submit_button = game.add.button()
+    this.game.stage.backgroundColor = "#ffffff";
+    left_button[29] = game.add.sprite(38,12,'after');
+    left_button[29].scale.setTo(0.08,0.08);
+    left_button[29].inputEnabled = true;
+    left_button[29].events.onInputDown.add(this.backtosecondscreen,this);
+    right_button[29] = game.add.sprite(950,12,'before');
+    right_button[29].scale.setTo(0.08,0.08);
+
+    this.game.scale.pageAlignHorizontally = true;
+    this.game.scale.pageAlignVertically = true;
+    this.game.scale.refresh();
+    var style = { font: "23px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+    screen_text[20] = game.add.text(92,100,'Question only for ' + input_answer[0].text._text + " : " ,style);
+    screen_text[1] = game.add.text(92,146,'What kinds of heat transfer were taking place here?',style);
+    var style1 = { font: "20px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+
+    screen_text[2] = game.add.text(95,190,'Click on the correct text answer below.',style1);
+    var style2 = { font: "23px tahoma", fill: "#737373", boundsAlignH: "center", boundsAlignV: "middle" };
+
+    answer_option[18] = game.add.text(100,230,'A. Conduction and Convection',style2);
+    answer_option[19] = game.add.text(100,260,'B. Convection and Radiation',style2);
+    style3 = { font: "23px tahoma", fill: "#39ff14", boundsAlignH: "center", boundsAlignV: "middle", wordWrap : true, wordWrapWidth :400}; //correctanswer
+    style4 = { font: "23px tahoma", fill: "#FF0000", boundsAlignH: "center", boundsAlignV: "middle", wordWrap : true, wordWrapWidth :400};//wrong answer
+    feedback[0] = game.add.text(95,502,'',style4);
+  //  feedback_next[0]=game.add.text(95,530,'',style3);
+    feedback[1] = game.add.text(95,502,'',style3);
+    //feedback[2] = game.add.text(95,502,'',style4)
+    //feedback_next[1]=game.add.text(95,530,'',style4);
+    //
+    for(i=18;i<20;i++)
+    {
+    answer_option[i].inputEnabled = true;
+    answer_option[i].events.onInputDown.add(this.feedback_function,this);
+    //answer_option[i].events.onInputOver.add(over, this);
+    //answer_option[i].text.events.onInputOut.add(out, this);
+    console.log('hey');
+    }
+
+    },
+
+     feedback_function : function(item)
+     {
+       console.log('hi');
+       var fb = item.text;
+       console.log(item.text);
+
+       if (fb == "A. Conduction and Convection")
+       {
+         individual_score[0] = individual_score[0] + 1;
+         //hiding all previous feedback
+         //if(feedback_count[0] == 1) {
+         if(feedback[1] != '' && feedback_next[1] != '')
+         {
+           feedback[1].text = '';
+           feedback_next[1].text ='';
+         }
+         feedback[0].text = 'The answer is convection and radiation.  Notice that the flame never touched Harley’s hand, so there is no conduction heat transfer.  The lighter’s flame heats the air around it and the hot air rises up, burning Harley’s hand.  In addition, the flame itself gives off radiation heat, which when held close enough to Harley’s hand, also contributes to its burning. ';
+         //feedback_next[0].text = 'Let us understand this more. Click on the next button.';
+
+         right_button[29].inputEnabled = true;
+         right_button[29].events.onInputDown.add(this.gototointerimscreen2,this);
+
+
+       //}
+     }
+       else if (fb == "B. Convection and Radiation" )
+       {
+         if(feedback[0] != '' && feedback_next[0]!= '')
+         {
+           feedback[0].text = '';
+           feedback_next[0].text ='';
+         }
+           //game.state.start('conduction_screen');
+        //if(feedback_count[0] == 1) {
+         //feedback[] = game.add.text(95,502,'You may think that Sasha’s hands got warm because of friction.',style4);
+         //feedback_next[1] = game.add.text(95,532,'But only by holding hands together, Tanvi’s hands can transfer heat to Sasha’s.',style4);
+         feedback[1].text = "You are right. The correct answer is convection and radiation.";
+         //feedback[0]
+         // feedback[0].setText('');
+         // feedback_next[0].setText('');
+         // feedback[0].setText('Feedback : You may think that Sasha’s hands got warm because of friction');
+         //feedback_next[1].text = "But only by holding hands together, Tanvi’s hands can transfer heat to Sasha’s";
+         // feedback[0].addColor('#FF0000', 0) ;
+         // feedback_next[0].addColor('#FF0000',0);
+         right_button[29].inputEnabled = true;
+         right_button[29].events.onInputDown.add(this.gotowrongone,this);
+
+     }
+
+
+     },
+     gototoconductionscreen : function()
+     {
+       game.state.start('interimscreen2');
+     },
+     gotowrongone : function()
+     {
+       game.state.start('interimscreen2');
+     },
+     backtosecondscreen : function()
+     {
+       game.state.start('interimscreen1');
+     },
+
+}
+var individual_quiz2 = function(game){}
+individual_quiz2.prototype=
+{
+  init : function()
+  {
+    game.load = new CustomLoader (game);
+  },
+  preload : function()
+  {
+
+  },
+  start : function()
+  {
+  },
+  create : function()
+  {
+    //   sessionstart();
+
+    //background[0] = game.add.sprite(0,0,'demo','INTROSCREEN_BG');
+    //submit_button = game.add.button()
+    this.game.stage.backgroundColor = "#ffffff";
+    left_button[33] = game.add.sprite(38,12,'after');
+    left_button[33].scale.setTo(0.08,0.08);
+    left_button[33].inputEnabled = true;
+    left_button[33].events.onInputDown.add(this.backtosecondscreen,this);
+    right_button[33] = game.add.sprite(950,12,'before');
+    right_button[33].scale.setTo(0.08,0.08);
+
+    this.game.scale.pageAlignHorizontally = true;
+    this.game.scale.pageAlignVertically = true;
+    this.game.scale.refresh();
+    var style = { font: "23px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+    screen_text[20] = game.add.text(92,100,'Question only for ' + input_answer[1].text._text + " : " ,style);
+    screen_text[1] = game.add.text(92,146,'What kinds of heat transfer were taking place here?',style);
+    var style1 = { font: "20px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+
+    screen_text[2] = game.add.text(95,190,'Click on the correct text answer below.',style1);
+    var style2 = { font: "23px tahoma", fill: "#737373", boundsAlignH: "center", boundsAlignV: "middle" };
+
+    answer_option[18] = game.add.text(100,230,'A. Conduction and Convection',style2);
+    answer_option[19] = game.add.text(100,260,'B. Convection and Radiation',style2);
+    style3 = { font: "23px tahoma", fill: "#39ff14", boundsAlignH: "center", boundsAlignV: "middle", wordWrap : true, wordWrapWidth :400}; //correctanswer
+    style4 = { font: "23px tahoma", fill: "#FF0000", boundsAlignH: "center", boundsAlignV: "middle", wordWrap : true, wordWrapWidth :400};//wrong answer
+    feedback[0] = game.add.text(95,502,'',style4);
+  //  feedback_next[0]=game.add.text(95,530,'',style3);
+    feedback[1] = game.add.text(95,502,'',style3);
+    //feedback[2] = game.add.text(95,502,'',style4)
+    //feedback_next[1]=game.add.text(95,530,'',style4);
+    //
+    for(i=18;i<20;i++)
+    {
+    answer_option[i].inputEnabled = true;
+    answer_option[i].events.onInputDown.add(this.feedback_function,this);
+    //answer_option[i].events.onInputOver.add(over, this);
+    //answer_option[i].text.events.onInputOut.add(out, this);
+    console.log('hey');
+    }
+
+    },
+
+     feedback_function : function(item)
+     {
+       console.log('hi');
+       var fb = item.text;
+       console.log(item.text);
+
+       if (fb == "A. Conduction and Convection")
+       {
+         individual_score[1] = individual_score[1] + 1;
+         //hiding all previous feedback
+         //if(feedback_count[0] == 1) {
+         if(feedback[1] != '' && feedback_next[1] != '')
+         {
+           feedback[1].text = '';
+           feedback_next[1].text ='';
+         }
+         feedback[0].text = 'The answer is convection and radiation.  Notice that the flame never touched Harley’s hand, so there is no conduction heat transfer.  The lighter’s flame heats the air around it and the hot air rises up, burning Harley’s hand.  In addition, the flame itself gives off radiation heat, which when held close enough to Harley’s hand, also contributes to its burning. ';
+         //feedback_next[0].text = 'Let us understand this more. Click on the next button.';
+
+         right_button[33].inputEnabled = true;
+         right_button[33].events.onInputDown.add(this.gototointerimscreen2,this);
+
+
+       //}
+     }
+       else if (fb == "B. Convection and Radiation" )
+       {
+         if(feedback[0] != '' && feedback_next[0]!= '')
+         {
+           feedback[0].text = '';
+           feedback_next[0].text ='';
+         }
+           //game.state.start('conduction_screen');
+        //if(feedback_count[0] == 1) {
+         //feedback[] = game.add.text(95,502,'You may think that Sasha’s hands got warm because of friction.',style4);
+         //feedback_next[1] = game.add.text(95,532,'But only by holding hands together, Tanvi’s hands can transfer heat to Sasha’s.',style4);
+         feedback[1].text = "You are right. The correct answer is convection and radiation.";
+         //feedback[0]
+         // feedback[0].setText('');
+         // feedback_next[0].setText('');
+         // feedback[0].setText('Feedback : You may think that Sasha’s hands got warm because of friction');
+         //feedback_next[1].text = "But only by holding hands together, Tanvi’s hands can transfer heat to Sasha’s";
+         // feedback[0].addColor('#FF0000', 0) ;
+         // feedback_next[0].addColor('#FF0000',0);
+         right_button[33].inputEnabled = true;
+         right_button[33].events.onInputDown.add(this.gotowrongone,this);
+
+     }
+
+
+     },
+     gototoconductionscreen : function()
+     {
+       game.state.start('interimscreen3');
+     },
+     gotowrongone : function()
+     {
+       game.state.start('interimscreen3');
+     },
+     backtosecondscreen : function()
+     {
+       game.state.start('interimscreen2');
+     },
+}
+var individual_quiz3 = function(game){}
+individual_quiz3.prototype=
+{
+  init : function()
+  {
+    game.load = new CustomLoader (game);
+  },
+  preload : function()
+  {
+
+  },
+  start : function()
+  {
+  },
+  create : function()
+  {
+    //   sessionstart();
+
+    //background[0] = game.add.sprite(0,0,'demo','INTROSCREEN_BG');
+    //submit_button = game.add.button()
+    this.game.stage.backgroundColor = "#ffffff";
+    left_button[34] = game.add.sprite(38,12,'after');
+    left_button[34].scale.setTo(0.08,0.08);
+    left_button[34].inputEnabled = true;
+    left_button[34].events.onInputDown.add(this.backtosecondscreen,this);
+    right_button[34] = game.add.sprite(950,12,'before');
+    right_button[34].scale.setTo(0.08,0.08);
+
+    this.game.scale.pageAlignHorizontally = true;
+    this.game.scale.pageAlignVertically = true;
+    this.game.scale.refresh();
+    var style = { font: "23px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+    screen_text[20] = game.add.text(92,100,'Question only for ' + input_answer[2].text._text + " : " ,style);
+    screen_text[1] = game.add.text(92,146,'What kinds of heat transfer were taking place here?',style);
+    var style1 = { font: "20px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+
+    screen_text[2] = game.add.text(95,190,'Click on the correct text answer below.',style1);
+    var style2 = { font: "23px tahoma", fill: "#737373", boundsAlignH: "center", boundsAlignV: "middle" };
+
+    answer_option[18] = game.add.text(100,230,'A. Conduction and Convection',style2);
+    answer_option[19] = game.add.text(100,260,'B. Convection and Radiation',style2);
+    style3 = { font: "23px tahoma", fill: "#39ff14", boundsAlignH: "center", boundsAlignV: "middle", wordWrap : true, wordWrapWidth :400}; //correctanswer
+    style4 = { font: "23px tahoma", fill: "#FF0000", boundsAlignH: "center", boundsAlignV: "middle", wordWrap : true, wordWrapWidth :400};//wrong answer
+    feedback[0] = game.add.text(95,502,'',style4);
+  //  feedback_next[0]=game.add.text(95,530,'',style3);
+    feedback[1] = game.add.text(95,502,'',style3);
+    //feedback[2] = game.add.text(95,502,'',style4)
+    //feedback_next[1]=game.add.text(95,530,'',style4);
+    //
+    for(i=18;i<20;i++)
+    {
+    answer_option[i].inputEnabled = true;
+    answer_option[i].events.onInputDown.add(this.feedback_function,this);
+    //answer_option[i].events.onInputOver.add(over, this);
+    //answer_option[i].text.events.onInputOut.add(out, this);
+    console.log('hey');
+    }
+
+    },
+
+     feedback_function : function(item)
+     {
+       console.log('hi');
+       var fb = item.text;
+       console.log(item.text);
+
+       if (fb == "A. Conduction and Convection")
+       {
+         individual_score[2] = individual_score[2] + 1;
+         //hiding all previous feedback
+         //if(feedback_count[0] == 1) {
+         if(feedback[1] != '' && feedback_next[1] != '')
+         {
+           feedback[1].text = '';
+           feedback_next[1].text ='';
+         }
+         feedback[0].text = 'The answer is convection and radiation.  Notice that the flame never touched Harley’s hand, so there is no conduction heat transfer.  The lighter’s flame heats the air around it and the hot air rises up, burning Harley’s hand.  In addition, the flame itself gives off radiation heat, which when held close enough to Harley’s hand, also contributes to its burning. ';
+         //feedback_next[0].text = 'Let us understand this more. Click on the next button.';
+
+         right_button[29].inputEnabled = true;
+         right_button[29].events.onInputDown.add(this.gototointerimscreen2,this);
+
+
+       //}
+     }
+       else if (fb == "B. Convection and Radiation" )
+       {
+         if(feedback[0] != '' && feedback_next[0]!= '')
+         {
+           feedback[0].text = '';
+           feedback_next[0].text ='';
+         }
+           //game.state.start('conduction_screen');
+        //if(feedback_count[0] == 1) {
+         //feedback[] = game.add.text(95,502,'You may think that Sasha’s hands got warm because of friction.',style4);
+         //feedback_next[1] = game.add.text(95,532,'But only by holding hands together, Tanvi’s hands can transfer heat to Sasha’s.',style4);
+         feedback[1].text = "You are right. The correct answer is convection and radiation.";
+         //feedback[0]
+         // feedback[0].setText('');
+         // feedback_next[0].setText('');
+         // feedback[0].setText('Feedback : You may think that Sasha’s hands got warm because of friction');
+         //feedback_next[1].text = "But only by holding hands together, Tanvi’s hands can transfer heat to Sasha’s";
+         // feedback[0].addColor('#FF0000', 0) ;
+         // feedback_next[0].addColor('#FF0000',0);
+         right_button[34].inputEnabled = true;
+         right_button[34].events.onInputDown.add(this.gotowrongone,this);
+
+     }
+
+
+     },
+     gototoconductionscreen : function()
+     {
+       game.state.start('final_screen');
+     },
+     gotowrongone : function()
+     {
+       game.state.start('final_screen');
+     },
+     backtosecondscreen : function()
+     {
+       game.state.start('interimscreen2');
+     },
+}
+var final_screen = function(game){}
+final_screen.prototype =
+{
+  init : function()
+  {
+     game.load = new CustomLoader(game);
+  },
+   preload : function()
+  {
+  //game.plugins.add(new Phaser.Plugin.PhaserWebComponents(game));
+   game.load.webfont('tahoma','Tahoma');
+   game.load.image('before','assets/left.png');
+   game.load.image('after','assets/right.png');
+  // game.load.video('demo','assets/SummerBreeze.mp4');
+
+ },
+  create : function()
+  {
+  //   sessionstart();
+
+  //background[0] = game.add.sprite(0,0,'demo','INTROSCREEN_BG');
+  //submit_button = game.add.button()
+  this.game.stage.backgroundColor = "#ffffff";
+  this.game.scale.pageAlignHorizontally = true;
+  this.game.scale.pageAlignVertically = true;
+  this.game.scale.refresh();
+
+
+
+  var style = { font: "23px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+
+
+  var style1 = { font: "20px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
+  if(group_score == 0)
+  {
+      screen_text[8] = game.add.text(92,146,'Your group grade is 0/60 as you got no answers correct',style);
+  }
+  else if(group_score == 1)
+  {
+    screen_text[8] = game.add.text(92,146,'Your group grade is 20/60 as you got one answer correct out of 3',style);
+  }
+  else if (group_score == 2)
+  {
+    screen_text[8] = game.add.text(92,146,'Your group grade is 40/60 as you got two answers correct out of 3',style);
+
+  }
+  else if (group_score == 3)
+  {
+    screen_text[8] = game.add.text(92,146,'Your group grade is 60/60 as you got all answers correct.',style);
+
+  }
+  screen_text[9] = game.add.text(92,200,input_answer[0].text._text + "your individual grade is " + individual_score[0]*10,style);
+    screen_text[10] = game.add.text(92,250,input_answer[1].text._text + "your individual grade is " + individual_score[1]*10,style);
+    screen_text[11] = game.add.text(92,250,input_answer[2].text._text + "your individual grade is " + individual_score[2]*10,style);
+
+
+},
+pan122 : function()
+{
+ game.state.start('interimscreen1');
+}
+}
+    /*var start_screen = function(game){}
       start_screen.prototype =
       {
        init : function()
@@ -3270,6 +4081,16 @@ game.state.add('middle_screen6',middle_screen6);
 
 game.state.add('quiz5_screen',quiz5_screen);
 game.state.add('quiz6_screen',quiz6_screen);
+game.state.add('individual_quiz1',individual_quiz1);
+game.state.add('individual_quiz2',individual_quiz2);
+game.state.add('individual_quiz3',individual_quiz3);
+game.state.add('interimscreen1',interimscreen1);
+game.state.add('interimscreen2',interimscreen2);
+game.state.add('interimscreen3',interimscreen3);
+game.state.add('final_screen',final_screen);
+game.state.add('lastvideoscreen1',lastvideoscreen1);
+game.state.add('lastvideoscreen2',lastvideoscreen2);
+game.state.add('lastvideoscreen3',lastvideoscreen3);
 //game.state.add('quiz7_screen',quiz7_screen);
 game.state.add('sunrise_screen',sunrise_screen);
 game.state.add('hotairballoon_screen',hotairballoon_screen);
