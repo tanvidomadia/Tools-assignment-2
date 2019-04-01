@@ -205,10 +205,10 @@ var style1 = { font: "16px tahoma", fill: "#000000", boundsAlignH: "center", bou
     game.input.onDown.add(this.pause_function, this);
     video[1].onComplete.add(this.video1_stop,this);
   },
-  render : function()
-         {
-          game.debug.text('x: ' + game.input.x + ' y: ' + game.input.y, 32, 32);
-        },
+  // render : function()
+  //        {
+  //         game.debug.text('x: ' + game.input.x + ' y: ' + game.input.y, 32, 32);
+  //       },
           pause_function : function()
           {
           video[1].paused = (video[1].paused) ? false : true;
@@ -877,10 +877,10 @@ var style1 = { font: "16px tahoma", fill: "#000000", boundsAlignH: "center", bou
        left_button[17].events.onInputDown.add(this.middlescreen1transition,this);
 
      },
-     render : function()
-            {
-             game.debug.text('x: ' + game.input.x + ' y: ' + game.input.y, 32, 32);
-           },
+     // render : function()
+     //        {
+     //         game.debug.text('x: ' + game.input.x + ' y: ' + game.input.y, 32, 32);
+     //       },
            middlescreen1transition : function()
            {
             game.state.start('hands_screen');
@@ -915,10 +915,10 @@ var style1 = { font: "16px tahoma", fill: "#000000", boundsAlignH: "center", bou
        left_button[18].events.onInputDown.add(this.middlescreen2transition,this);
 
      },
-     render : function()
-            {
-             game.debug.text('x: ' + game.input.x + ' y: ' + game.input.y, 32, 32);
-           },
+     // render : function()
+     //        {
+     //         game.debug.text('x: ' + game.input.x + ' y: ' + game.input.y, 32, 32);
+     //       },
            middlescreen2transition : function()
            {
             game.state.start('middle_screen4');
@@ -956,10 +956,10 @@ var style1 = { font: "16px tahoma", fill: "#000000", boundsAlignH: "center", bou
        left_button[19].inputEnabled = true;
        left_button[19].events.onInputDown.add(this.middlescreen3transition,this);
      },
-     render : function()
-            {
-             game.debug.text('x: ' + game.input.x + ' y: ' + game.input.y, 32, 32);
-           },
+     // render : function()
+     //        {
+     //         game.debug.text('x: ' + game.input.x + ' y: ' + game.input.y, 32, 32);
+     //       },
            middlescreen3transition : function()
            {
             game.state.start('middle_screen5');
@@ -3140,10 +3140,11 @@ sunrise_screen : function()
       this.game.scale.refresh();
       left_button[16] = game.add.sprite(38,12,'after');
       left_button[16].scale.setTo(0.12,0.12);
-      left_button[16].inputEnabled = true;
-      left_button[16].events.onInputDown.add(this.pan122,this);
+
       right_button[16] = game.add.sprite(950,12,'before');
       right_button[16].scale.setTo(0.12,0.12);
+      right_button[16].inputEnabled = true;
+      right_button[16].events.onInputDown.add(this.pan122,this);
 
 
       var style = { font: "23px tahoma", fill: "#000000", boundsAlignH: "center", boundsAlignV: "middle" };
