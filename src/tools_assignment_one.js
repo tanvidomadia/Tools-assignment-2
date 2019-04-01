@@ -17,7 +17,7 @@ var right_button = [];
 var image1;
 var sprite1;
 var videosprite = [];
-var feedback_count = [0,0,0];
+var feedback_count = [0,0,0,0,0,0];
 var style3;
 var style4;
 var input_answer = [];
@@ -3519,9 +3519,10 @@ sunrise_screen : function()
            },*/
       feedback61_function : function(item)
       {
-        console.log('hi1');
+
         feedback_count[3] = feedback_count[3] + 1;
-        if(feedback_count[3] < 2)
+             console.log(feedback_count[3]);
+        if(feedback_count[3] <=2)
         {
 
           console.log("hi12");
@@ -3775,7 +3776,7 @@ sunrise_screen : function()
     feedback62_function : function(item)
     {
       feedback_count[4] = feedback_count[4] + 1;
-      if(feedback_count[4]<2)
+      if(feedback_count[4]< 2)
       {
       console.log('hi');
       var fb = item.text;
