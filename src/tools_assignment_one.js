@@ -3253,10 +3253,10 @@ sunrise_screen : function()
        console.log('hey');
        }
 
-       feedback[14] = game.add.text(95,502,'',style4);
-       feedback[15] = game.add.text(95,502,'',style4);
-       feedback[16] = game.add.text(95,502,'',style4);
-       feedback[17] = game.add.text(95,502,'',style3);
+       feedback[14] = game.add.text(95,402,'',style4);
+       feedback[15] = game.add.text(95,402,'',style4);
+       feedback[16] = game.add.text(95,402,'',style4);
+       feedback[17] = game.add.text(95,402,'',style3);
 
        },
 
@@ -3504,10 +3504,10 @@ sunrise_screen : function()
      console.log('hey');
      }
 
-     feedback[14] = game.add.text(95,502,'',style4);
-     feedback[15] = game.add.text(95,502,'',style4);
-     feedback[16] = game.add.text(95,502,'',style4);
-     feedback[17] = game.add.text(95,502,'',style3);
+     feedback[14] = game.add.text(95,402,'',style4);
+     feedback[15] = game.add.text(95,402,'',style4);
+     feedback[16] = game.add.text(95,402,'',style4);
+     feedback[17] = game.add.text(95,402,'',style3);
 
      },
 
@@ -3760,10 +3760,10 @@ sunrise_screen : function()
    console.log('hey');
    }
 
-   feedback[14] = game.add.text(95,502,'',style4);
-   feedback[15] = game.add.text(95,502,'',style4);
-   feedback[16] = game.add.text(95,502,'',style4);
-   feedback[17] = game.add.text(95,502,'',style3);
+   feedback[14] = game.add.text(95,402,'',style4);
+   feedback[15] = game.add.text(95,402,'',style4);
+   feedback[16] = game.add.text(95,402,'',style4);
+   feedback[17] = game.add.text(95,402,'',style3);
 
    },
 
