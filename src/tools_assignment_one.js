@@ -4718,8 +4718,8 @@ individual_quiz3.prototype=
          feedback[0].text = 'The answer is convection and radiation.  Notice that the flame never touched Harley’s hand, so there is no conduction heat transfer.  The lighter’s flame heats the air around it and the hot air rises up, burning Harley’s hand.  In addition, the flame itself gives off radiation heat, which when held close enough to Harley’s hand, also contributes to its burning. ';
          //feedback_next[0].text = 'Let us understand this more. Click on the next button.';
 
-         right_button[29].inputEnabled = true;
-         right_button[29].events.onInputDown.add(this.gototoconductionscreen,this);
+         right_button[34].inputEnabled = true;
+         right_button[34].events.onInputDown.add(this.gototoconductionscreen,this);
 
 
        //}
